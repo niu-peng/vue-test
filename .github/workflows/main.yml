@@ -1,0 +1,48 @@
+name: Deploy Vue Project to GitHub Pages # 部署 Workflow 的名称
+
+on:
+  push:
+    branches:
+      - main # 仅在代码推送到 main 分支时触发 (请根据您的主分支名称修改)
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    # 必要的权限设置
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+
+    steps:
+      # 1. 检出代码
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      # 2. 设置 Node.js 环境 (使用您项目兼容的版本，这里默认使用 20)
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm' # 使用 npm 进行依赖缓存
+
+      # 3. 安装依赖
+      - name: Install dependencies
+        run: npm install
+        
+      # 4. 执行构建命令
+      # 注意：您原来的配置中运行的是 npm run build-pages，这里假设您的构建脚本是 'build'
+      # 如果您的构建脚本确实是 'build-pages'，请修改下面的 run: npm run build 为 run: npm run build-pages
+      - name: Build Vue project
+        run: npm run build
+        
+      # 5. 部署到 GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # 默认部署到 gh-pages 分支，由 Pages 设置自动读取
+          publish_branch: gh-pages
+          # 默认 Vue/Vite 的构建输出是 dist 文件夹
+          publish_dir: ./dist
