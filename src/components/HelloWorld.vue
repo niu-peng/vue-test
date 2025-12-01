@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}李婷婷</h1>
+    <h1>测试在github 打包+部署页面</h1>
     <p>
       For a guide and recipes on how to configure / customize this project,<br>
       check out the
