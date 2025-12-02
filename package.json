@@ -9,6 +9,9 @@
   },
   "dependencies": {
     "core-js": "^3.8.3",
+    "less": "^4.4.2",
+    "openseadragon": "^5.0.1",
+    "paper": "^0.12.18",
     "vue": "^3.2.13"
   },
   "devDependencies": {
@@ -39,5 +42,9 @@
     "last 2 versions",
     "not dead",
     "not ie 11"
-  ]
+  ],
+  "engines": {
+    "node": "^16.10.0",
+    "npm": "^7.24.0"
+  }
 }
